@@ -58,28 +58,26 @@ static uint32_t get_gpio_direction (void)
 
 int board_late_init(void)
 {
-        int x = 0;
+	int x = 0;
 
-        printf ("Barrometer board_late_init\n");
-        
-	while (x<10)
+	printf ("Barrometer board_late_init\n");
+	
+	// Set all LEDs to outputs	
+	set_gpio_direction (0, AM335X_LED1 | AM335X_LED2 | AM335X_LED3 | AM335X_LED4);
+	while (x<5)
 	{
-		// Set all LEDs to outputs	
-		set_gpio_direction (0, AM335X_LED1 | AM335X_LED2 | AM335X_LED3 | AM335X_LED4);
-
 		// Turn all LEDs on
 		set_gpio_state (0, AM335X_LED1 | AM335X_LED2 | AM335X_LED3 | AM335X_LED4);
 
-		udelay(200000);
+		udelay(100000);
 
 		// Turn all LEDs off
 		set_gpio_state (AM335X_LED1 | AM335X_LED2 | AM335X_LED3 | AM335X_LED4, 0);
 
-		udelay(200000);
+		udelay(100000);
 		x++;
 	}
 
-
-        return 0;
+	return 0;
 }
 

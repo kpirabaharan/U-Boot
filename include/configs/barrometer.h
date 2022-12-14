@@ -1,5 +1,5 @@
 /*
- * linuxkit.h
+ * barrometer.h
  *
  * Copyright (C) 2018 Barr Group
  *
@@ -18,10 +18,10 @@
 
 #define CONFIG_AM33XX
 
-#define CONFIG_BOARD_LATE_INIT
-
 #include <asm/arch/cpu.h>
 #include <asm/arch/hardware.h>
+
+#define CONFIG_BOARD_LATE_INIT
 
 #define CONFIG_DMA_COHERENT
 #define CONFIG_DMA_COHERENT_SIZE	(1 << 20)
@@ -41,6 +41,16 @@
 #define CONFIG_INITRD_TAG
 
 #define CONFIG_SYS_CACHELINE_SIZE       64
+
+#define CONFIG_BOOTARGS \
+	"console=ttyO0,115200n8 mem=256M " \
+	"root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait " \
+	"init=/init ip=off"
+
+#define CONFIG_BOOTCOMMAND \
+	"mmc rescan;" \
+	"fatload mmc 0 81000000 uImage;" \
+	"bootm 81000000"
 
 /* commands to include */
 #include <config_cmd_default.h>
@@ -370,4 +380,4 @@
 #endif
 #endif
 
-#endif	/* ! __CONFIG_AM335X_EVM_H */
+#endif	/* ! __CONFIG_BARROMETER_H */
